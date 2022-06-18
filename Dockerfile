@@ -1,15 +1,11 @@
-FROM node:15.7.0-alpine3.11 AS build
+# Specify a base image
+FROM node:alpine
 
-WORKDIR /app
-ADD package.json /app/package.json
-ADD package-lock.json /app/package-lock.json
-RUN apk update && apk add python make g++
+#Install some dependencies
 
-RUN apk add --no-cache git
-RUN npm i --quiet
+WORKDIR /usr/app
+COPY ./ /usr/app
+RUN npm install
 
-ADD . /app
-RUN apk --no-cache upgrade
-
-WORKDIR /app
-CMD ["node","corn.js"]
+# Set up a default command
+CMD [ "npm","start" ]
