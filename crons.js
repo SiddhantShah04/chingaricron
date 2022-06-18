@@ -32,7 +32,7 @@ cron.schedule("*/10 * * * * *", async () => {
 
     } while (count < 5);
 
-    console.log("Cron done running",cronTaskRunning,new Date().toLocaleString())
+    console.log("Cron done running",cronTaskRunning,new Date().toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}) )
     cronTaskRunning = false
 
   } catch (error) {
