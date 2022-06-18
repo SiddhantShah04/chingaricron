@@ -4,7 +4,7 @@ import { follow, getTrendingPost, postLike, visitPost } from "./util.js";
 
 let cronTaskRunning = false
 
-cron.schedule("*/10 * * * * *", async () => {
+cron.schedule("0 22 * * 1-7", async () => {
     if(cronTaskRunning){
         return
     }
