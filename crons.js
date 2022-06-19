@@ -4,7 +4,7 @@ import { follow, getTrendingPost, postLike, visitPost } from "./util.js";
 
 let cronTaskRunning = false
 
-cron.schedule("0 22 * * 1-7", async () => {
+cron.schedule("0 */12 * * *", async () => {
     if(cronTaskRunning){
         return
     }
@@ -20,7 +20,7 @@ cron.schedule("0 22 * * 1-7", async () => {
 
       for (let posts of trendingPosts) {
 
-        //  await visitPost(posts._id);
+         await visitPost(posts._id);
         //  await postLike(posts._id, posts.ownerData._id);
         // await follow(posts.ownerData._id);
 
@@ -30,7 +30,7 @@ cron.schedule("0 22 * * 1-7", async () => {
       count =count+ 1;
       skip = limit * count;
 
-    } while (count < 5);
+    } while (count < 10);
 
     console.log("Cron done running",cronTaskRunning,new Date().toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}) )
     cronTaskRunning = false
