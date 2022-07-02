@@ -1,9 +1,11 @@
 {
   "type": "module",
   "scripts": {
-    "start": "node crons.js"
+    "start": "node crons.js & node riddheshChingari.js"
   },
   "dependencies": {
+    "@solana/spl-token": "0.1.8",
+    "@solana/web3.js": "1.35.1",
     "axios": "^0.27.2",
     "fs": "0.0.1-security",
     "node-cron": "^3.0.1",
