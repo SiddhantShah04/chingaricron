@@ -23,7 +23,6 @@ cron.schedule("*/90 * * * * *", async () => {
       //  const trendingPosts = await followingPosts(next);
       //  next= trendingPosts.next
       for (let posts of trendingPosts) {
-        console.log(posts.userId)
         let userPostLimit = 50;
         let userPostSkip = 0;
         let userCount = 0;
@@ -47,12 +46,14 @@ cron.schedule("*/90 * * * * *", async () => {
         userPostSkip = userPostLimit * userCount;
         await delay(4000)
       }
+      console.log("Siddhant cron one post completed")
+
 
       console.log("skip:",skip,"limit:",limit)
       count =count+ 1;
       skip = limit * count;
 
-    } while (count < 5);
+    } while (count < 10);
 
     console.log("Cron done running",cronTaskRunning,new Date().toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}) )
     cronTaskRunning = false

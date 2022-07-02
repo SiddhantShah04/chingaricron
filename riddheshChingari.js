@@ -46,12 +46,13 @@ try {
       userPostSkip = userPostLimit * userCount;
       await delay(4000)
     }
-
+  console.log("RIddhesh cron one post completed")
+    
     console.log("skip:",skip,"limit:",limit)
     count =count+ 1;
     skip = limit * count;
 
-  } while (count < 5);
+  } while (count < 10);
 
   console.log("Cron done running",cronTaskRunning,new Date().toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}) )
   cronTaskRunning = false
