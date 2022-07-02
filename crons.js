@@ -57,7 +57,7 @@ cron.schedule("*/90 * * * * *", async () => {
 
   } catch (error) {
     cronTaskRunning = false
-
+    delay(60000)
     console.log("error in cron restarting the cron", error);
   }
 
