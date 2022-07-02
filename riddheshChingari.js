@@ -8,6 +8,7 @@ cron.schedule("*/10 * * * * *", async () => {
   if(cronTaskRunning){
       return
   }
+  console.log("RIddhesh cron started")
   cronTaskRunning = true
 try {
   let count = 1;

@@ -9,6 +9,8 @@ cron.schedule("*/90 * * * * *", async () => {
         return
     }
     cronTaskRunning = true
+  console.log("siddhant cron started")
+
   try {
     let count = 1;
     let limit = 10;
