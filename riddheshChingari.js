@@ -22,7 +22,6 @@ try {
     //  const trendingPosts = await followingPosts(next);
     //  next= trendingPosts.next
     for (let posts of trendingPosts) {
-      console.log(posts.userId)
       let userPostLimit = 50;
       let userPostSkip = 0;
       let userCount = 0;
