@@ -32,7 +32,6 @@ try {
         
         userPosts = await getPostByUserId(posts.userId,userPostLimit,userPostSkip)
         for(let [i,userPost] of userPosts.data.entries()){
-          console.log(userPosts.hasMoreData,userPosts.data.length,i,userPost.post.mediaLocation.duration)
 
            await visitPost(userPost.post._id,userPost.post.mediaLocation.duration?userPost.post.mediaLocation.duration:47);
           await postLike(userPost.post._id, userPost.post.ownerData._id);

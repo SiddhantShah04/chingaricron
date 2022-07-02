@@ -61,7 +61,6 @@ export const visitPost = async (postId,duration) => {
         },
       }
     );
-console.log(response.data)
     return checkCode(response.data);
   } catch (error) {
     console.log(`error while post like ${error}`);
@@ -103,7 +102,6 @@ export const follow = async (followUserId) => {
         },
       }
     );
-console.log(response.data)
     return checkCode(response.data);
   } catch (error) {
     console.log(`error while post like ${error}`);
