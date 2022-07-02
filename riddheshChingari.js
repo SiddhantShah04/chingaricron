@@ -36,7 +36,7 @@ try {
 
            await visitPost(userPost.post._id,userPost.post.mediaLocation.duration?userPost.post.mediaLocation.duration:47);
           await postLike(userPost.post._id, userPost.post.ownerData._id);
-          await delay(1000)
+          await delay(2000)
   
         }
       // } while (i<userPosts.data.length);

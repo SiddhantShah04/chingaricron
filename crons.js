@@ -36,14 +36,14 @@ cron.schedule("*/90 * * * * *", async () => {
 
              await visitPost(userPost.post._id,userPost.post.mediaLocation.duration?userPost.post.mediaLocation.duration:47);
             await postLike(userPost.post._id, userPost.post.ownerData._id);
-            await delay(5000)
+            await delay(2000)
     
           }
         // } while (i<userPosts.data.length);
 
         userCount = userCount+ 1;
         userPostSkip = userPostLimit * userCount;
-        await delay(2000)
+        await delay(4000)
       }
 
       console.log("skip:",skip,"limit:",limit)
