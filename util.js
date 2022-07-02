@@ -8,8 +8,6 @@ const CHINGARI_URL = "https://api.chingari.io";
 function checkCode(response) {
   if (response.code == 200 || response.code == 201) {
     return response.code;
-  } else {
-    throw new error(response);
   }
 }
 
@@ -44,12 +42,12 @@ export const getTrendingPost = async (skip, limit) => {
   }
 };
 
-export const visitPost = async (postId) => {
+export const visitPost = async (postId,duration) => {
   try {
     const response = await axios.post(
       CHINGARI_URL + "/post/v2/visitPost",
       {
-        duration: 47,
+        duration: duration,
         feedType: 0,
         isDeeplink: "0",
         language: "english",
@@ -64,7 +62,7 @@ export const visitPost = async (postId) => {
         },
       }
     );
-
+console.log(response.data)
     return checkCode(response.data);
   } catch (error) {
     console.log(`error while post like ${error}`);
@@ -84,7 +82,6 @@ export const postLike = async (postId, ownerId) => {
         },
       }
     );
-
     return checkCode(response.data);
   } catch (error) {
     console.log(`error while post like ${error}`);
@@ -107,10 +104,49 @@ export const follow = async (followUserId) => {
         },
       }
     );
-
+console.log(response.data)
     return checkCode(response.data);
   } catch (error) {
     console.log(`error while post like ${error}`);
     throw error;
+  }
+};
+export const followingPosts = async (next) => {
+  try {
+
+   
+    const response = await axios.post(
+      CHINGARI_URL + "/feeds/following",
+      {"timestamp":next?next:"2022-06-22T18:28:34.653Z"},
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "User-Agent": "b3ca0e3ea01debb4",
+        },
+      }
+    );
+    return (response.data);
+  } catch (error) {
+    console.log(`error while comment ${error}`);
+  }
+};
+
+export const getPostByUserId = async (userId,userPostLimit,userPostSkip) => {
+  try {
+
+   
+    const response = await axios.post(
+      CHINGARI_URL + "/users/getPosts",
+      {"limit":userPostLimit,"skip":userPostSkip,"language":"english","ownerId":selfUserId,"userId":userId},
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "User-Agent": "b3ca0e3ea01debb4",
+        },
+      }
+    );
+    return (response.data);
+  } catch (error) {
+    console.log(`error while comment ${error}`);
   }
 };
