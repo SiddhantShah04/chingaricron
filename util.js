@@ -6,7 +6,7 @@ const authToken =
 const CHINGARI_URL = "https://api.chingari.io";
 
 function checkCode(response) {
-  console.log(response)
+  console.log(response);
   if (response.code == 200 || response.code == 201) {
     return response.code;
   }
@@ -43,7 +43,7 @@ export const getTrendingPost = async (skip, limit) => {
   }
 };
 
-export const visitPost = async (postId,duration) => {
+export const visitPost = async (postId, duration) => {
   try {
     const response = await axios.post(
       CHINGARI_URL + "/post/v2/visitPost",
@@ -112,11 +112,9 @@ export const follow = async (followUserId) => {
 };
 export const followingPosts = async (next) => {
   try {
-
-   
     const response = await axios.post(
       CHINGARI_URL + "/feeds/following",
-      {"timestamp":next?next:"2022-06-22T18:28:34.653Z"},
+      { timestamp: next ? next : "2022-06-22T18:28:34.653Z" },
       {
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -124,19 +122,23 @@ export const followingPosts = async (next) => {
         },
       }
     );
-    return (response.data);
+    return response.data;
   } catch (error) {
     console.log(`error while comment ${error}`);
   }
 };
 
-export const getPostByUserId = async (userId,userPostLimit,userPostSkip) => {
+export const getPostByUserId = async (userId, userPostLimit, userPostSkip) => {
   try {
-
-   
     const response = await axios.post(
       CHINGARI_URL + "/users/getPosts",
-      {"limit":userPostLimit,"skip":userPostSkip,"language":"english","ownerId":selfUserId,"userId":userId},
+      {
+        limit: userPostLimit,
+        skip: userPostSkip,
+        language: "english",
+        ownerId: selfUserId,
+        userId: userId,
+      },
       {
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -144,7 +146,41 @@ export const getPostByUserId = async (userId,userPostLimit,userPostSkip) => {
         },
       }
     );
-    return (response.data);
+    return response.data;
+  } catch (error) {
+    console.log(`error while comment ${error}`);
+  }
+};
+
+export const sharePost = async (postId, ownerId) => {
+  try {
+    const response = await axios.post(
+      CHINGARI_URL + "/post/sharePost",
+      { postId: postId, ownerId: ownerId, userId: selfUserId, shareType: "0" },
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(`error while comment ${error}`);
+  }
+};
+
+export const addComment = async (postId, ownerId) => {
+  try {
+    const response = await axios.post(
+      CHINGARI_URL + "/post/v2/add_comment",
+      { comment: "👍", postId: postId, ownerId: ownerId, userId: selfUserId },
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    );
+    return response.data;
   } catch (error) {
     console.log(`error while comment ${error}`);
   }

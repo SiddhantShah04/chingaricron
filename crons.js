@@ -1,10 +1,10 @@
 // var cron = require('node-cron');
 import * as cron from "node-cron";
-import {  follow, getTrendingPost, postLike, visitPost, followingPosts,getPostByUserId } from "./util.js";
+import {  follow, getTrendingPost, postLike, visitPost, followingPosts,getPostByUserId, sharePost, addComment } from "./util.js";
 
 let cronTaskRunning = false
 
-cron.schedule("*/90 * * * * *", async () => {
+cron.schedule("*/1 * * * * *", async () => {
     if(cronTaskRunning){
         return
     }
@@ -33,7 +33,8 @@ cron.schedule("*/90 * * * * *", async () => {
           
           userPosts = await getPostByUserId(posts.userId,userPostLimit,userPostSkip)
           for(let [i,userPost] of userPosts.data.entries()){
-
+            await sharePost(userPost.post._id,userPost.post.ownerData._id);
+            await addComment(userPost.post._id,userPost.post.ownerData._id);
              await visitPost(userPost.post._id,userPost.post.mediaLocation.duration?userPost.post.mediaLocation.duration:47);
             await postLike(userPost.post._id, userPost.post.ownerData._id);
             await delay(2000)
@@ -43,7 +44,7 @@ cron.schedule("*/90 * * * * *", async () => {
 
         userCount = userCount+ 1;
         userPostSkip = userPostLimit * userCount;
-        await delay(4000)
+        await delay(2000)
       }
       console.log("Siddhant cron one post completed")
 
